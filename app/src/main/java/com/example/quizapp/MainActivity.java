@@ -6,28 +6,48 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView mTxtQuestion;
+    private Button btnTrue;
+    private Button btnWrong;
+    private int mQuestionIndex;
+    private QuizModel[] questionCollection = new QuizModel[]{
+            new QuizModel(R.string.q1, true),
+            new QuizModel(R.string.q2, false),
+            new QuizModel(R.string.q3, true),
+            new QuizModel(R.string.q4, false),
+            new QuizModel(R.string.q5, true),
+            new QuizModel(R.string.q6, false),
+            new QuizModel(R.string.q7, true),
+            new QuizModel(R.string.q8, false),
+            new QuizModel(R.string.q9, true),
+            new QuizModel(R.string.q10, false),
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnTrue = findViewById(R.id.btnTrue);
-        View.OnClickListener myClickListener = new View.OnClickListener() {
+        mTxtQuestion = findViewById(R.id.txtQuestion);
+
+        QuizModel q1 = questionCollection[mQuestionIndex];
+
+        mTxtQuestion.setText(q1.getQuestion());
+         btnTrue = findViewById(R.id.btnTrue);
+
+        btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (view.getId() == R.id.btnTrue) {
-                    Toast myToastObject = Toast.makeText(getApplicationContext(), "btn True is tapped now!", Toast.LENGTH_LONG);
-                    myToastObject.show();
-                }
-            }
-        };
-        btnTrue.setOnClickListener(myClickListener);
 
-        Button btnWrong = findViewById(R.id.btnWrong);
+            }
+        });
+
+         btnWrong = findViewById(R.id.btnWrong);
 
         btnWrong.setOnClickListener(new View.OnClickListener() {
 
@@ -38,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        QuizModel model = new QuizModel(R.string.q1, true);
 
     }
 
