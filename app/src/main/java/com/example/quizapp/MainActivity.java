@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        QuizModel model = new QuizModel(R.string.q1, true);
+
     }
 
 }
