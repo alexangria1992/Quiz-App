@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                evaluateUsersAnswer(true);
                 changeQuestionOnButtonClick();
+
 
             }
         });
@@ -58,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                evaluateUsersAnswer(false);
                 changeQuestionOnButtonClick();
+
+
 
             }
         });
@@ -77,6 +82,18 @@ public class MainActivity extends AppCompatActivity {
         mTxtQuestion.setText(mQuizQuestion);
 
 
+
+    }
+
+    private void evaluateUsersAnswer(boolean userGuess){
+        boolean currentQuestionAnswer = questionCollection[mQuestionIndex].isAnswer();
+
+        if(currentQuestionAnswer == userGuess){
+            Toast.makeText(getApplicationContext(), R.string.correct_toast_message, Toast.LENGTH_SHORT).show();
+
+        }else {
+            Toast.makeText(getApplicationContext(), R.string.incorrect_text, Toast.LENGTH_SHORT ).show();
+        }
 
     }
 
