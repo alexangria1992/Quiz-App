@@ -1,5 +1,6 @@
 package com.example.quizapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private final String SCORE_KEY = "SCORE";
+    private final String INDEX_KEY = "INDEX";
 
     private TextView mTxtQuestion;
     private Button btnTrue;
@@ -43,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(savedInstanceState != null){
+            mUserScore = savedInstanceState.getInt(SCORE_KEY);
+            mQuestionIndex = savedInstanceState.getInt(INDEX_KEY);
+        } else {
+            mUserScore = 0;
+        }
+
+        Toast.makeText(getApplicationContext(), "OnCreate methods is called ", Toast.LENGTH_SHORT).show();
+
         mTxtQuestion = findViewById(R.id.txtQuestion);
 
         QuizModel q1 = questionCollection[mQuestionIndex];
@@ -54,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.quizPB);
 
         mQuizStatsTextView = findViewById(R.id.txtQuizStats);
+        mQuizStatsTextView.setText(mUserScore + "");
+
 
         btnTrue = findViewById(R.id.btnTrue);
 
@@ -127,4 +141,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //LifeCycle methods
+    @Override
+    protected  void onStart(){
+        super.onStart();
+        Toast.makeText(getApplicationContext(), "OnStart methods is called ", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(getApplicationContext(), "OnResume methods is called ", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "OnPause methods is called ", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(getApplicationContext(), "OnStop methods is called ", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(getApplicationContext(), "OnDestroy methods is called ", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SCORE_KEY, mUserScore);
+        outState.putInt(INDEX_KEY, mQuestionIndex);
+    }
 }
